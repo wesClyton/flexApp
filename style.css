@@ -1,0 +1,30 @@
+body {
+	background: #e7e7e7;
+	font-size: 1em;
+	margin: 10px;
+	font-family: Verdana;
+}
+
+h1 {
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+input {
+	width: 60px;
+}
+
+p {
+	text-align: center;
+}
+
+.kml {
+	border: 1px inset #aaa;
+	font-weight: bold;
+	color: #f00;
+}
+
+.kml input {
+	border: 0;
+}
