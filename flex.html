@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+
+</head>
+
+
+<body>
+
+<div id="container">
+
+<form class="form">
+
+<h1>Calculadora Flex:</h1>
+
+<table>
+
+<tr>
+	<td>
+	<label for="Gas_Cons">Consumo com Gasolina:</label>
+	</td>
+
+	<td>
+	<span class="kml">KM/L
+	<input type="number" name="Gas_Cons" id="Gas_Cons">
+	</span>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<label for="Eta_Cons">Consumo com Etanol:</label>
+	</td>
+
+	<td>
+	<span class="kml">KM/L
+	<input type="number" name="Eta_Cons" id="Eta_Cons">
+	</span>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<label for="Gas_Price">Preço de Gasolina:</label>
+	</td>
+
+	<td>
+	<span class="kml">R$
+	<input type="number" name="Gas_Price" id="Gas_Price">
+	</span>
+	</td>
+</tr>
+
+<tr>
+	<td>
+	<label for="Eta_Price">Preço do Etanol:</label>
+	</td>
+
+	<td>
+	<span class="kml">R$
+	<input type="number" name="Eta_Price" id="Eta_Price">
+	</span>
+	</td>
+</tr>
+
+</table>
+
+<p>
+<button  onclick="CalcFlex()" type="button">Gasolina ou Etanol?</button>
+</p>
+</div>
+
+<script type="text/javascript">
+window.onload = LoadLocalData();
+
+function LoadLocalData(){
+	var gas_con = localStorage.getItem('CalcFlex_Gas_Con');
+	var eta_con = localStorage.getItem('CalcFlex_Eta_Con');
+
+	if (gas_con == null) {
+		localStorage.setItem('CalcFlex_Gas_Con', '1.3');
+		document.getElementById("Gas_Cons").value="1.3";
+	}
+	else {
+		document.getElementById("Gas_Cons").value = localStorage.getItem('CalcFlex_Gas_Con');
+	}
+
+	if (eta_con == null) {
+		localStorage.setItem('CalcFlex_Eta_Con', '1');
+		document.getElementById("Eta_Cons").value="1";
+	}
+	else {
+		document.getElementById("Eta_Cons").value = localStorage.getItem('CalcFlex_Eta_Con');
+	}
+
+}
+
+function CalcFlex(){
+	var gas_con = localStorage.getItem('CalcFlex_Gas_Con');
+	var eta_con = localStorage.getItem('CalcFlex_Eta_Con');
+	var gas_price = document.getElementById("Gas_Price").value;
+	var eta_price = document.getElementById("Eta_Price").value;
+
+	effic_dif = gas_con / eta_con;
+	price_dif = gas_price / eta_price;
+
+	if (effic_dif > price_dif){
+		alert('Abasteça com Gasolina');
+	}
+	else {
+		alert('Abasteça com Etanol');
+	}
+}
+
+document.querySelector('#Gas_Cons').addEventListener('keyup',function(){
+		localStorage.setItem('CalcFlex_Gas_Con', this.value);}, false);
+
+document.querySelector('#Eta_Cons').addEventListener('keyup',function(){
+		localStorage.setItem('CalcFlex_Eta_Con', this.value);}, false);
+</script>
+
+</form>
+</body>
